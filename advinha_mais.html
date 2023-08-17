@@ -1,0 +1,81 @@
+<meta charset="UTF-8">
+
+<input/>
+<button>Compare com o meu segredo</button>
+
+<script>
+    function sorteia() {
+
+       return Math.round(Math.random() * 10); //gera um número aleatório entre 0 e 10
+
+    }
+
+    function sorteiaNumeros(quantidade) { //quantidade é um parâmetro
+
+        var segredos = []; 
+
+        var numero = 1;
+
+        while(numero <= quantidade) { //enquanto o número for menor ou igual a quantidade
+
+              var numeroAleatorio = sorteia(); //gera um número aleatório entre 0 e 10
+              var achou = false;
+
+              if (numeroAleatorio !== 0) {
+                     for(var posicao = 0; posicao < segredos.length; posicao++) { //length é o tamanho do array
+
+                           if(segredos[posicao] == numeroAleatorio){   //se o número aleatório for igual ao número da posição
+                                achou = true;
+                                break; //para a execução do for
+                           }
+
+                     }
+
+                     if (achou == false) {
+                           segredos.push(numeroAleatorio); //adiciona o número aleatório no array
+                           numero++;
+                     }
+              }
+
+        }
+
+        return segredos;
+
+    }
+
+    var segredos = sorteiaNumeros(3); //chama a função sorteiaNumeros e passa o valor 3 como parâmetro
+
+    console.log(segredos); //imprime o array no console
+
+    var input = document.querySelector("input"); //seleciona o input
+    input.focus(); //coloca o foco no input
+
+    function verifica() { //função que verifica se o número digitado é igual ao número sorteado
+
+       var achou = false;
+
+       for(var posicao = 0; posicao < segredos.length; posicao++) { //length é o tamanho do array
+
+              if(input.value == segredos[posicao]) {  //se o número digitado for igual ao número da posição
+
+                     alert("Você ACERTOU!");
+                     achou = true;
+                     break;
+              } 
+       }
+
+       if(achou == false) {
+
+              alert("Você ERROU!");
+       }
+
+       input.value = "";
+       input.focus();
+
+    }
+
+    var button = document.querySelector("button"); //seleciona o botão
+
+    button.onclick = verifica;
+
+</script>
